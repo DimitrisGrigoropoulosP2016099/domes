@@ -15,11 +15,9 @@ def main():
 
     print("____________________________\n")
 
-    print(radArray)
-
     print("choose algorithm or initialize array\n")
 
-    print("1.random array \n2.Bubble-sort\n3.Quick-sort\n4.Merge-sort\n5.Selection-sort\n6.Insertion-sort\n7.shell-sort\n8.Diagram\n9.exit")
+    print("1.random array \n2.Bubble-sort\n3.Quick-sort\n4.Merge-sort\n5.Selection-sort\n6.Insertion-sort\n7.shell-sort\n8.Test-run\n9.exit")
 
     UserChoice = input("enter : ")
 
@@ -58,6 +56,9 @@ def main():
     if UserChoice == "7":
         cpArray = copy.deepcopy(radArray)
         Shell(cpArray)
+    if UserChoice == "8":
+        runs = 10
+        testrun(runs)
 
     if UserChoice == "9":
         print("exiting program")
@@ -67,10 +68,8 @@ def main():
 def RandomVector(megethos):
     global n, radArray
     radArray = np.random.randint(1000001, size=megethos)
-    time.sleep(1)
     print(radArray)
     n = megethos + 100
-    time.sleep(1)
     main()
 
 
@@ -78,18 +77,15 @@ def Bubblesort(radArray):
     copyOfArray = copy.deepcopy(radArray)
     print(copyOfArray)
     print("\nOriginal array")
-    time.sleep(1)
     sizeof = len(copyOfArray)
     for i in range(n-1):
         for j in range(0, sizeof-i-1):
             if copyOfArray[j] > copyOfArray[j+1]:
                 copyOfArray[j], copyOfArray[j +
                                             1] = copyOfArray[j+1], copyOfArray[j]
-    time.sleep(1)
     print("\n")
     print("new array\n")
     print(copyOfArray)
-    time.sleep(1)
     main()
 
 
@@ -207,8 +203,16 @@ def Shell(cpArray):
     print("\n new array\n")
     main()
 
-
+def testrun(runs):
+    if runs == 10:
+        main()
+        print("1")
+    elif runs < 10:
+        testArray = RandomVector(n)
+        print("x")
+        runs = runs + 1
+    
 main()
 
 
-# ToDo fix merge 
+# ToDo fix merge , 10 run test , time 
