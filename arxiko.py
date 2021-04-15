@@ -2,6 +2,8 @@ import numpy as np
 import time
 import copy as copy
 from array import array
+import sys
+import os
 
 
 n = 100
@@ -10,12 +12,19 @@ radArray = []
 
 
 def main():
+
     print("____________________________\n")
+
     print(radArray)
+
     print("choose algorithm or initialize array\n")
-    print("1.random array \n2.Bubble-sort\n3.Quick-sort\n4.Merge-sort\n5.Selection-sort\n6.Insertion-sort\nshell-sort\n7.Diagram")
+
+    print("1.random array \n2.Bubble-sort\n3.Quick-sort\n4.Merge-sort\n5.Selection-sort\n6.Insertion-sort\n7.shell-sort\n8.Diagram\n9.exit")
+
     UserChoice = input("enter : ")
+
     print("\n")
+
     if UserChoice == "1":
         RandomVector(n)
 
@@ -34,19 +43,25 @@ def main():
     if UserChoice == "4":
         cpArray = copy.deepcopy(radArray)
         print(cpArray)
-        Merge_sort(cpArray , 0 , len(cpArray) - 1 )
+        Merge_sort(cpArray, 0, len(cpArray) - 1)
         print(cpArray)
         main()
 
     if UserChoice == "5":
-        Selection()
+        cpArray = copy.deepcopy(radArray)
+        Selection(cpArray)
 
     if UserChoice == "6":
-        Insertion()
+        cpArray = copy.deepcopy(radArray)
+        Insertion(cpArray)
 
     if UserChoice == "7":
-        Shell()
+        cpArray = copy.deepcopy(radArray)
+        Shell(cpArray)
 
+    if UserChoice == "9":
+        print("exiting program")
+        sys.exit()
 
 
 def RandomVector(megethos):
@@ -102,7 +117,7 @@ def Quick(arr, low, high):
         Quick(arr, pi+1, high)
 
 
-def Merge_sort(cpArray , left_index , right_index):
+def Merge_sort(cpArray, left_index, right_index):
     if left_index >= right_index:
         return
 
@@ -111,8 +126,9 @@ def Merge_sort(cpArray , left_index , right_index):
     Merge_sort(array, middle + 1, right_index)
     Merge(array, left_index, right_index, middle)
 
+
 def Merge(array, left_index, right_index, middle):
-    
+
     aristero_copy = array[left_index:middle + 1]
     deksi_copy = array[middle+1:right_index+1]
 
@@ -125,15 +141,13 @@ def Merge(array, left_index, right_index, middle):
         if aristero_copy[aristero_copy_index] <= deksi_copy[deksi_copy_index]:
             array[sorted_index] = aristero_copy[aristero_copy_index]
             aristero_copy_index = aristero_copy_index + 1
-        
+
         else:
             array[sorted_index] = deksi_copy[deksi_copy_index]
             deksi_copy_index = deksi_copy_index + 1
 
-        
         sorted_index = sorted_index + 1
 
-    
     while aristero_copy_index < len(aristero_copy):
         array[sorted_index] = aristero_copy[aristero_copy_index]
         aristero_copy_index = aristero_copy_index + 1
@@ -144,22 +158,57 @@ def Merge(array, left_index, right_index, middle):
         deksi_copy_index = deksi_copy_index + 1
         sorted_index = sorted_index + 1
 
-def Selection(radArray):
-    print(radArray)
-    print("\nOriginal array")
+
+def Selection(cpArray):
+    print(cpArray)
+    print("Original array\n")
+    for i in range(len(cpArray)):
+
+        min_idx = i
+        for j in range(i+1, len(cpArray)):
+            if cpArray[min_idx] > cpArray[j]:
+                min_idx = j
+
+        cpArray[i], cpArray[min_idx] = cpArray[min_idx], cpArray[i]
+    print(cpArray)
+    print("new array\n\n")
+    main()
 
 
-def Insertion(radArray):
-    print(radArray)
-    print("\nOriginal array")
+def Insertion(cpArray):
+    print(cpArray)
+    print("Original array\n")
+    for i in range(1, len(cpArray)):
+
+        key = cpArray[i]
+
+        j = i-1
+        while j >= 0 and key < cpArray[j]:
+            cpArray[j+1] = cpArray[j]
+            j -= 1
+        cpArray[j+1] = key
+    print(cpArray)
+    print("new array\n\n")
+    main()
 
 
-def Shell(radArray):
-    print(radArray)
-    print("\nOriginal array")
+def Shell(cpArray):
+    print(cpArray)
+    print("\nOriginal array\n")
+    inc = len(cpArray) // 2
+    while inc:
+        for i, el in enumerate(cpArray[inc:], inc):
+            while i >= inc and cpArray[i - inc] > el:
+                cpArray[i] = cpArray[i - inc]
+                i -= inc
+            cpArray[i] = el
+        inc = 1 if inc == 2 else inc * 5 // 11
+    print(cpArray)
+    print("\n new array\n")
+    main()
 
 
 main()
 
 
-#ToDo fix merge
+# ToDo fix merge 
