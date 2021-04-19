@@ -1,0 +1,11 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+xpoints = np.array([0.00036400000000003097,0.0008485000000000298, 0.001292000000000293 , 0.0016712999999999312 , 0.0021615999999999858 , 0.0026668999999999166 , 0.003187599999999957,0.00377509999999992,0.004223800000000111,0.004786699999999922])
+ypoints = np.array([ 100 , 200 , 300 , 400 , 500 , 600 ,700 ,800 ,900 ,1000])
+
+plt.plot(xpoints, ypoints)
+plt.title("Merge Sort")
+plt.ylabel("megethos array")
+plt.xlabel("xronos")
+plt.show()
